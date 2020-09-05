@@ -2,30 +2,31 @@
 #include <iostream>
 using namespace std;
 
-template <class kind>
-class Ordenamiento {
+template <class C>
+class Busqueda {
     public:
-    vector <kind> elements;
-    Ordenamiento(vector <kind>);
+    vector <C> elementos;
+    Busqueda(vector <C>);
 
-    int SS(kind);
-    int SFS(kind);
-    int STS(kind);
-    int SSS(kind);
-    int BS(kind);
+    int SS(C);
+    int SFS(C);
+    int STS(C);
+    int SSS(C);
+    int BS(C);
 };
-template <class kind>
-Ordenamiento<kind>::Ordenamiento(vector <kind> elements)
+
+template <class C>
+Busqueda<C>::Busqueda(vector <C> elementos)
 {
-    this -> elements = elements;
+    this -> elementos = elementos;
 }
 
 
-template <class kind>
-int Ordenamiento <kind> ::SS(kind valor){
+template <class C>
+int Busqueda <C> ::SS(C valor){
 
-    for (int i = 0; i <= elements.size(); i++){
-        if (elements[i] == valor){
+    for (int i = 0; i <= elementos.size(); i++){
+        if (elementos[i] == valor){
             return i;
         }
 
@@ -33,12 +34,12 @@ int Ordenamiento <kind> ::SS(kind valor){
     return -1;
 }
 
-template <class kind>
-int Ordenamiento <kind> ::SFS(kind valor){
+template <class C>
+int Busqueda <C> ::SFS(C valor){
 
-    for (int i = 0; i <= elements.size(); i++){
-        if (elements[i] == valor){
-            swap(elements[i], elements[0]);
+    for (int i = 0; i <= elementos.size(); i++){
+        if (elementos[i] == valor){
+            swap(elementos[i], elementos[0]);
             return i;
         }
 
@@ -46,15 +47,15 @@ int Ordenamiento <kind> ::SFS(kind valor){
     return -1;
 }
 
-template <class kind>
-int Ordenamiento <kind> ::STS(kind valor){
+template <class C>
+int Busqueda <C> ::STS(C valor){
 
-    for (int i = 0; i <= elements.size(); i++){
-        if (elements[i] == valor){
+    for (int i = 0; i <= elementos.size(); i++){
+        if (elementos[i] == valor){
             if(i == 0){
                 return i;
             }
-            swap(elements[i], elements[i-1]);
+            swap(elementos[i], elementos[i-1]);
             return i;
         }
 
@@ -62,29 +63,29 @@ int Ordenamiento <kind> ::STS(kind valor){
     return -1;
 }
 
-template <class kind>
-int Ordenamiento <kind> ::SSS(kind valor){
+template <class C>
+int Busqueda <C> ::SSS(C valor){
 
-    for (int i = 0 ; i <= elements.size()-2 ; i++)/* coloca mínimo de a[i+1]...a[n-1] en a[i] */
-        for (int j = i+1 ; j <= elements.size()-1 ; j++){
-            if (elements[i] > elements[j]){ 
-                swap(elements[i], elements[j]);
+    for (int i = 0 ; i <= elementos.size()-2 ; i++)
+        for (int j = i+1 ; j <= elementos.size()-1 ; j++){
+            if (elementos[i] > elementos[j]){ 
+                swap(elementos[i], elementos[j]);
             } 
-            if (elements[i] == valor){
+            if (elementos[i] == valor){
                 return i;
             }
         }
     return -1;
 }
 
-template <class kind>
-int Ordenamiento <kind> ::BS(kind valor){
+template <class C>
+int Busqueda <C> ::BS(C valor){
     int central, bajo, alto, valorCentral;
     bajo = 0;
-    alto = elements.size()-1;
+    alto = elementos.size()-1;
     while (bajo <= alto) {
         central = (bajo + alto)/2;
-        valorCentral =  elements[central];
+        valorCentral =  elementos[central];
         if (valor == valorCentral)
             return central;
         else if (valor < valorCentral)
